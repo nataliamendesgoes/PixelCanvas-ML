@@ -1,1 +1,34 @@
-# PixelCanvas-ML
+## Checklist do Notebook
+
+- [x] Instalar bibliotecas necessárias (torch, torchvision, pandas, numpy, pillow, matplotlib, sklearn, tqdm, requests)  
+- [x] Fazer download dos datasets / extrair datasets para `/content/data`  
+- [ ] Definir estrutura padrão dos datasets (`dataset/frag_eroded/*.png` + `fragments.txt`)  
+- [ ] Detectar automaticamente todos os datasets dentro de `/content/data`  
+- [ ] Carregar `fragments.txt` e construir `train_table` com posição e rotação de cada fragmento  
+- [ ] Validar formato dos dados (imagens carregam corretamente e colunas estão corretas)  
+- [ ] Calcular bounding box de cada dataset usando centro dos fragmentos e rotação aplicada  
+- [ ] Inferir tamanho do canvas original de cada dataset  
+- [ ] Normalizar coordenadas `(cx, cy)` para `(cx_norm, cy_norm)`  
+- [ ] Converter rotação em `sin` e `cos` para regressão contínua  
+- [ ] Separar datasets em **treino** e **validação** por *scene*  
+- [ ] Implementar `Dataset` do PyTorch para carregar fragmentos e targets  
+- [ ] Aplicar pré-processamento de imagens (RGBA → RGB, resize, normalize)  
+- [ ] Criar `DataLoader` para treino e validação  
+- [ ] Selecionar arquitetura base **ResNet18 pré-treinada**  
+- [ ] Substituir camada final para prever `(cx_norm, cy_norm, sin(rot), cos(rot))`  
+- [ ] Definir função de perda para posição (`SmoothL1Loss`)  
+- [ ] Definir função de perda para rotação (`MSELoss`)  
+- [ ] Combinar perdas com peso configurável para rotação  
+- [ ] Implementar loop de treinamento por epoch  
+- [ ] Exibir progresso de treinamento usando **barra de progresso (tqdm)**  
+- [ ] Registrar métricas de erro por epoch (loss, erro de posição, erro de rotação)  
+- [ ] Salvar melhor modelo baseado em perda de validação  
+- [ ] Plotar gráficos de treinamento (loss vs epoch, erro de posição vs epoch, erro de rotação vs epoch)  
+- [ ] Executar inferência nos datasets de teste  
+- [ ] Converter previsões normalizadas para coordenadas absolutas  
+- [ ] Gerar `fragment_positions.csv` com `(fragment_number, x, y, rotation)`  
+- [ ] Reconstruir imagens usando fragmentos rotacionados e posições previstas  
+- [ ] Visualizar reconstruções comparando **ground truth vs previsão**  
+- [ ] Plotar histogramas de erro de posição e rotação  
+- [ ] Plotar curvas de sucesso (percentual de fragmentos dentro de limites de erro)  
+- [ ] Exportar resultados finais (modelo treinado, CSV de previsões, imagens reconstruídas)
